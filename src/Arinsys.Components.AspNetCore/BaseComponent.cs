@@ -31,10 +31,10 @@ namespace Arinsys.Components.AspNetCore
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            ComponentCssClasses.CollectionChanged += (_, __) =>
+            ComponentCssClasses.CollectionChanged += async (_, __) =>
             {
                 CssClass = string.Join(" ", ComponentCssClasses);
-                StateHasChanged();
+                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             };
         }
 
