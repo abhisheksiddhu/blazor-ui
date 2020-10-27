@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public abstract class BaseComponent : ComponentBase, IDisposable
+    public class BaseComponent : ComponentBase, IDisposable
     {
         /// <summary>
         /// Gets a list of CSS classes that gets combined and added to the <c>class</c> attribute. Derived components should 

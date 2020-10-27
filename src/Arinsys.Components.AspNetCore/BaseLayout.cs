@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public abstract class BaseLayout : LayoutComponentBase, IDisposable
+    public class BaseLayout : LayoutComponentBase, IDisposable
     {
         private readonly List<IDisposable> subscriptions = new List<IDisposable>();
 
