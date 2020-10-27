@@ -45,7 +45,7 @@ namespace Arinsys.Components.AspNetCore.Tables
             await base.OnInitializedAsync();
             if (DataAccessor != null)
             {
-                ChangeStateOn(FiltersUpdated.Do(filters => DataAccessor(filters)));
+                ChangeStateOn(FiltersUpdated.Select(filters => DataAccessor(filters)).Concat().Do(data => Data = data));
             }
         }
     }
