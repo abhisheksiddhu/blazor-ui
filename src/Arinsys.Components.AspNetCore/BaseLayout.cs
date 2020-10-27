@@ -6,36 +6,13 @@ using System.Collections.ObjectModel;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public abstract class BaseComponent : ComponentBase, IDisposable
+    public abstract class BaseLayout : LayoutComponentBase, IDisposable
     {
-        /// <summary>
-        /// Gets a list of CSS classes that gets combined and added to the <c>class</c> attribute. Derived components should 
-        /// typically use this value to override the primary HTML element's 'class' attribute.
-        /// </summary>
-        public ObservableCollection<string> ComponentCssClasses { get; private set; } = new ObservableCollection<string>();
-
-        /// <summary>
-        /// Gets a CSS class string that combines the <see cref="ComponentCssClasses"/>
-        /// properties. Derived components should typically use this value for the primary HTML element's
-        /// 'class' attribute.
-        /// </summary>
-        public string CssClass { get; private set; }
-
         private readonly List<IDisposable> subscriptions = new List<IDisposable>();
 
         protected void ChangeStateOn(IObservable<object> observable)
         {
             subscriptions.Add(observable.Subscribe(onNext: async nextValue => await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false)));
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            ComponentCssClasses.CollectionChanged += async (_, __) =>
-            {
-                CssClass = string.Join(" ", ComponentCssClasses);
-                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-            };
         }
 
         #region IDisposable Support

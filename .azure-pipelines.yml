@@ -33,12 +33,12 @@ steps:
       feedsToUse: 'select'
       vstsFeed: '$(VSTS_FEED)'
 
-  # - task: DotNetCoreCLI@2
-  #   displayName: 'Run tests on all .net core test projects'
-  #   inputs:
-  #     command: test
-  #     projects: '**/*Tests*.csproj'
-  #     arguments: '--configuration  $(BuildConfiguration) --collect "Code coverage"'
+  - task: DotNetCoreCLI@2
+    displayName: 'Run tests for Arinsys.Components.AspNetCore.Tests project'
+    inputs:
+      command: test
+      projects: 'tests/Arinsys.Components.AspNetCore.Tests/Arinsys.Components.AspNetCore.Tests.csproj'
+      arguments: '--configuration  $(BuildConfiguration) --collect "Code coverage"'
 
   # publish .net core projects artifacts
   - task: DotNetCoreCLI@2
