@@ -1,0 +1,30 @@
+﻿<div class="panel @CategoryCssClass @CssClass">
+    <div class="panel-heading">@Header</div>
+    <div class="panel-body">@Body</div>
+    <div class="panel-footer">@Footer</div>
+</div>
+
+@code{
+    [Parameter]
+    public ElementStatusCategory Category { get; set; }
+
+    [Parameter]
+    public RenderFragment Header { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+
+    public string CategoryCssClass => Category switch
+    {
+        ElementStatusCategory.Default => "panel-default",
+        ElementStatusCategory.Info => "panel-info",
+        ElementStatusCategory.Primary => "panel-primary",
+        ElementStatusCategory.Success => "panel-success",
+        ElementStatusCategory.Warning => "panel-warning",
+        ElementStatusCategory.Danger => "panel-danger",
+        _ => "panel-default",
+    };
+}

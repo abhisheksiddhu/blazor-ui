@@ -16,4 +16,14 @@
         Eleven = 11,
         Twelve = 12
     }
+
+    public enum ElementStatusCategory
+    {
+        Default = 0,
+        Info,
+        Primary,
+        Success,
+        Warning,
+        Danger
+    }
 }
