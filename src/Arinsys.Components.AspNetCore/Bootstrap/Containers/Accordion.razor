@@ -1,0 +1,20 @@
+﻿<div class="panel-body">
+    <div class="panel-group" id="accordion">
+        <CascadingValue Value="this">
+            @ChildContent
+        </CascadingValue>
+        @foreach (var tab in Tabs)
+        {
+            <div class="panel @tab.Category.GetCategoryCssClass() @CssClass">
+                <div class="panel-heading">
+                    <h5 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" @onclick="@(() => tab.ToggleCollapse())">@tab.Header</a>
+                    </h5>
+                </div>
+                <div class="panel-collapse collapse in @(tab.IsCollapsed ? "" : "show")">
+                    <div class="panel-body">@tab.Body</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

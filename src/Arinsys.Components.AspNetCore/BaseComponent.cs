@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace Arinsys.Components.AspNetCore
 {
@@ -25,7 +26,12 @@ namespace Arinsys.Components.AspNetCore
 
         protected void ChangeStateOn(IObservable<object> observable)
         {
-            subscriptions.Add(observable.Subscribe(onNext: async nextValue => await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false)));
+            subscriptions.Add(observable.Subscribe(onNext: async nextValue => await TriggerStateChange()));
+        }
+
+        protected void ChangeStateOn<TCollectionEntity>(ObservableCollection<TCollectionEntity> observableCollection)
+        {
+            observableCollection.CollectionChanged += async (_, __) => await TriggerStateChange();
         }
 
         protected override void OnInitialized()
@@ -34,8 +40,13 @@ namespace Arinsys.Components.AspNetCore
             ComponentCssClasses.CollectionChanged += async (_, __) =>
             {
                 CssClass = string.Join(" ", ComponentCssClasses);
-                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+                await TriggerStateChange();
             };
+        }
+
+        protected ConfiguredTaskAwaitable TriggerStateChange()
+        {
+            return InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         #region IDisposable Support
