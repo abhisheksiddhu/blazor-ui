@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public partial class FormGroupText : BaseFormGroup<string>
+    public partial class BUIB_FormGroupText : BUIB_FormGroup<string>
     {
         [Parameter]
         public string InputPrepend { get; set; }

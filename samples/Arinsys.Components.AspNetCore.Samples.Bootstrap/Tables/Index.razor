@@ -2,7 +2,7 @@
 @using Arinsys.Components.AspNetCore.Samples.Models
 @using Arinsys.Components.AspNetCore.Samples.Fakes
 
-<Arinsys.Components.AspNetCore.Bootstrap.Table DataAccessor="GetData" TEntity="User" TTableDataFilters="Arinsys.Components.AspNetCore.TableDataFilters<User>">
+<BUIB_Table DataAccessor="GetData" TEntity="User" TTableDataFilters="TableDataFilters<User>">
     <Head>
         <tr>
             <th>Id</th>
@@ -17,10 +17,10 @@
             <td>@context.Email</td>
         </tr>
     </Body>
-</Arinsys.Components.AspNetCore.Bootstrap.Table>
+</BUIB_Table>
 
 @code{
-    protected Task<IEnumerable<User>> GetData(Arinsys.Components.AspNetCore.TableDataFilters<User> tableDataFilters)
+    protected Task<IEnumerable<User>> GetData(TableDataFilters<User> tableDataFilters)
     {
         IEnumerable<User> users = FakeUser.ValidDefaults.Generate(10);
         return Task.FromResult(users);

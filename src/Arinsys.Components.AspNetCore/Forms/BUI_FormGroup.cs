@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public abstract class BaseFormGroup<TValue> : BaseComponent, IFormGroup<TValue>
+    public abstract class BUI_FormGroup<TValue> : BaseComponent, IFormGroup<TValue>
     {
         [Parameter]
         public string Identifier { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public partial class Accordion
+    public partial class BUIB_Accordion
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
@@ -38,7 +38,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         public bool IsCollapsed { get; set; } = true;
 
         [CascadingParameter]
-        public Accordion Accordion { get; set; }
+        public BUIB_Accordion Accordion { get; set; }
 
         public void ToggleCollapse()
         {

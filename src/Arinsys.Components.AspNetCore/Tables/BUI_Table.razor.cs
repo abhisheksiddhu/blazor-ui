@@ -13,9 +13,9 @@ namespace Arinsys.Components.AspNetCore
 
     }
 
-    public partial class Table<TEntity, TTableDataFilters> : BaseComponent where TTableDataFilters : TableDataFilters<TEntity>, new()
+    public partial class BUI_Table<TEntity, TTableDataFilters> : BaseComponent where TTableDataFilters : TableDataFilters<TEntity>, new()
     {
-        internal readonly BehaviorSubject<object> filtersUpdated = new BehaviorSubject<object>(null);
+        internal readonly BehaviorSubject<object> filtersUpdated = new(null);
 
         [Parameter]
         public virtual Func<TTableDataFilters, Task<IEnumerable<TEntity>>> DataAccessor { get; set; }
