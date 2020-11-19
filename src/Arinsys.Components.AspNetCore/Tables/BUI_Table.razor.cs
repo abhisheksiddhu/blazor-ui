@@ -13,7 +13,7 @@ namespace Arinsys.Components.AspNetCore
 
     }
 
-    public partial class BUI_Table<TEntity, TTableDataFilters> : BUI_Component where TTableDataFilters : BUI_TableDataFilters<TEntity>, new()
+    public partial class BUI_Table<TEntity, TTableDataFilters> : BaseComponent where TTableDataFilters : BUI_TableDataFilters<TEntity>, new()
     {
         internal readonly BehaviorSubject<object> filtersUpdated = new(null);
 

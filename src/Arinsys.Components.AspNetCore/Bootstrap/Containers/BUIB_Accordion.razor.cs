@@ -18,7 +18,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         }
     }
 
-    public class BUIB_AccordionTab : BUI_Component
+    public class BUIB_AccordionTab : BaseComponent
     {
         [Parameter]
         public ElementStatusCategory Category { get; set; }

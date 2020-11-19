@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public class BUI_Layout : LayoutComponentBase, IDisposable
+    public class BaseLayout : LayoutComponentBase, IDisposable
     {
         private readonly List<IDisposable> subscriptions = new List<IDisposable>();
 

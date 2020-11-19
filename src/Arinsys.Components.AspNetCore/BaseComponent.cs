@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public class BUI_Component : ComponentBase, IDisposable
+    public class BaseComponent : ComponentBase, IDisposable
     {
         /// <summary>
         /// Gets a list of CSS classes that gets combined and added to the <c>class</c> attribute. Derived components should 

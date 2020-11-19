@@ -10,7 +10,7 @@ namespace Arinsys.Components.AspNetCore
         public Action<EventArgs, TEntity> OnSubmit { get; set; }
     }
 
-    public partial class BUI_Form<TEntity, TFormDefinition> : BUI_Component
+    public partial class BUI_Form<TEntity, TFormDefinition> : BaseComponent
         where TFormDefinition : BUI_FormDefinition<TEntity>
     {
         [Parameter]
