@@ -1,9 +1,8 @@
 ﻿@page "/tables"
-@using Arinsys.Components.AspNetCore.Bootstrap.Tables
 @using Arinsys.Components.AspNetCore.Samples.Models
 @using Arinsys.Components.AspNetCore.Samples.Fakes
 
-<Table DataAccessor="GetData" TEntity="User" TTableDataFilters="Arinsys.Components.AspNetCore.Tables.TableDataFilters<User>">
+<Arinsys.Components.AspNetCore.Bootstrap.Table DataAccessor="GetData" TEntity="User" TTableDataFilters="Arinsys.Components.AspNetCore.TableDataFilters<User>">
     <Head>
         <tr>
             <th>Id</th>
@@ -18,10 +17,10 @@
             <td>@context.Email</td>
         </tr>
     </Body>
-</Table>
+</Arinsys.Components.AspNetCore.Bootstrap.Table>
 
 @code{
-    protected Task<IEnumerable<User>> GetData(Arinsys.Components.AspNetCore.Tables.TableDataFilters<User> tableDataFilters)
+    protected Task<IEnumerable<User>> GetData(Arinsys.Components.AspNetCore.TableDataFilters<User> tableDataFilters)
     {
         IEnumerable<User> users = FakeUser.ValidDefaults.Generate(10);
         return Task.FromResult(users);

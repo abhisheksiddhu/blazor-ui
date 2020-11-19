@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 
 using System;
 
-namespace Arinsys.Components.AspNetCore.Forms
+namespace Arinsys.Components.AspNetCore
 {
     public class FormDefinition<TEntity>
     {

@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 
-namespace Arinsys.Components.AspNetCore.Tables
+namespace Arinsys.Components.AspNetCore
 {
     public class TableDataFilters<TEntity>
     {

@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-namespace Arinsys.Components.AspNetCore.Bootstrap.Forms
+namespace Arinsys.Components.AspNetCore.Bootstrap
 {
     public partial class FormGroupText : BaseFormGroup<string>
     {

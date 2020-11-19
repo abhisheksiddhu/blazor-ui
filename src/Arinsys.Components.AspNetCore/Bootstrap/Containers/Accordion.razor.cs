@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arinsys.Components.AspNetCore.Bootstrap.Containers
+namespace Arinsys.Components.AspNetCore.Bootstrap
 {
     public partial class Accordion
     {

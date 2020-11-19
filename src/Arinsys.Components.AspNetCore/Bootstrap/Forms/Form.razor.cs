@@ -1,7 +1,7 @@
-﻿namespace Arinsys.Components.AspNetCore.Bootstrap.Forms
+﻿namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public partial class Form<TEntity, TFormDefinition> : AspNetCore.Forms.Form<TEntity, TFormDefinition>
-        where TFormDefinition : AspNetCore.Forms.FormDefinition<TEntity>
+    public partial class Form<TEntity, TFormDefinition> : AspNetCore.Form<TEntity, TFormDefinition>
+        where TFormDefinition : FormDefinition<TEntity>
     {
     }
 }
