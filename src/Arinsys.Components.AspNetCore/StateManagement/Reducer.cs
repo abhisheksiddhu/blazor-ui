@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Arinsys.Components.AspNetCore.StateManagement
+﻿namespace Arinsys.Components.AspNetCore.StateManagement
 {
     /// <summary>Identifies a class that is used to update state based on the execution of a specific action</summary>
 	/// <typeparam name="TState">The class type of the state this reducer operates on</typeparam>
@@ -33,7 +27,14 @@ namespace Arinsys.Components.AspNetCore.StateManagement
 		/// <returns>The new state based on the current state + the changes the action should cause</returns>
         public abstract TState Reduce(TState currentState, TAction action);
 
-        public bool ShouldReduceStateForAction(object action) => action is TAction;
-        TState IReducer<TState>.Reduce(TState currentState, object action) => Reduce(currentState, (TAction)action);
+        public bool ShouldReduceStateForAction(object action)
+        {
+            return action is TAction;
+        }
+
+        TState IReducer<TState>.Reduce(TState currentState, object action)
+        {
+            return Reduce(currentState, (TAction)action);
+        }
     }
 }

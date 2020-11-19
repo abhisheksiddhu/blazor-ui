@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public interface IFormGroup
+    public interface IBUI_FormGroup
     {
         string Identifier { get; set; }
         string Label { get; set; }
@@ -15,7 +15,7 @@ namespace Arinsys.Components.AspNetCore
         IEnumerable<string> ValidationMessages { get; }
     }
 
-    public interface IFormGroup<TValue> : IFormGroup
+    public interface IBUI_FormGroup<TValue> : IBUI_FormGroup
     {
     }
 }

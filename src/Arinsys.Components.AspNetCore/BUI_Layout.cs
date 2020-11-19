@@ -2,11 +2,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public class BaseLayout : LayoutComponentBase, IDisposable
+    public class BUI_Layout : LayoutComponentBase, IDisposable
     {
         private readonly List<IDisposable> subscriptions = new List<IDisposable>();
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.StateManagement
@@ -29,7 +28,10 @@ namespace Arinsys.Components.AspNetCore.StateManagement
             this.effects = effects;
         }
 
-        public IObservable<TState> Select() => Select<TState>();
+        public IObservable<TState> Select()
+        {
+            return Select<TState>();
+        }
 
         public IObservable<TProjection> Select<TProjection>() where TProjection : class
         {

@@ -9,7 +9,7 @@ namespace Arinsys.Components.AspNetCore.Tests
         [Fact]
         public void ComponentCssClasses_ChangesObserved()
         {
-            BaseComponent component = RenderComponent<BaseComponent>().Instance;
+            BUI_Component component = RenderComponent<BUI_Component>().Instance;
 
             component.ComponentCssClasses.Add("testClass");
 

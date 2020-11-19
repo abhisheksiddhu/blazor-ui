@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public class TableDataFilters<TEntity>
+    public class BUI_TableDataFilters<TEntity>
     {
 
     }
 
-    public partial class BUI_Table<TEntity, TTableDataFilters> : BaseComponent where TTableDataFilters : TableDataFilters<TEntity>, new()
+    public partial class BUI_Table<TEntity, TTableDataFilters> : BUI_Component where TTableDataFilters : BUI_TableDataFilters<TEntity>, new()
     {
         internal readonly BehaviorSubject<object> filtersUpdated = new(null);
 

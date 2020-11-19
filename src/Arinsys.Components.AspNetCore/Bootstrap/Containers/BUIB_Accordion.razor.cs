@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
@@ -14,7 +9,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        internal ObservableCollection<AccordionTab> Tabs { get; set; } = new();
+        internal ObservableCollection<BUIB_AccordionTab> Tabs { get; set; } = new();
 
         protected override void OnInitialized()
         {
@@ -23,7 +18,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         }
     }
 
-    public class AccordionTab : BaseComponent
+    public class BUIB_AccordionTab : BUI_Component
     {
         [Parameter]
         public ElementStatusCategory Category { get; set; }

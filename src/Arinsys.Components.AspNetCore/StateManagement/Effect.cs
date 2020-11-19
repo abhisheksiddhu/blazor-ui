@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.StateManagement
 {
@@ -24,7 +20,10 @@ namespace Arinsys.Components.AspNetCore.StateManagement
 
     public abstract class Effect<TState, TAction> : IEffect<TState> where TAction : IAction<TState>
     {
-        public bool ShouldReactToAction(object action) => action is TAction;
+        public bool ShouldReactToAction(object action)
+        {
+            return action is TAction;
+        }
 
         /// <summary>This method is executed by the store immediately after reducer completes the execution of a specific action</summary>
         /// <param name="previousState">The state prior to reducer executing the action</param>
@@ -32,6 +31,9 @@ namespace Arinsys.Components.AspNetCore.StateManagement
         /// <param name="action">The action that was dispatched</param>
         public abstract Task HandleAsync(TState previousState, TState currentState, TAction action);
 
-        Task IEffect<TState>.HandleAsync(TState previousState, TState currentState, object action) => HandleAsync(previousState, currentState, (TAction)action);
+        Task IEffect<TState>.HandleAsync(TState previousState, TState currentState, object action)
+        {
+            return HandleAsync(previousState, currentState, (TAction)action);
+        }
     }
 }
