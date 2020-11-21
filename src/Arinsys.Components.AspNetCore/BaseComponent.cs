@@ -11,9 +11,9 @@ namespace Arinsys.Components.AspNetCore
     {
         /// <summary>
         /// Gets a list of CSS classes that gets combined and added to the <c>class</c> attribute. Derived components should 
-        /// typically use this value to override the primary HTML element's 'class' attribute.
+        /// typically modify this collection to override the primary HTML element's 'class' attribute.
         /// </summary>
-        public ObservableCollection<string> ComponentCssClasses { get; private set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> ComponentCssClasses { get; } = new();
 
         /// <summary>
         /// Gets a CSS class string that combines the <see cref="ComponentCssClasses"/>
@@ -22,7 +22,7 @@ namespace Arinsys.Components.AspNetCore
         /// </summary>
         public string CssClass { get; private set; }
 
-        private readonly List<IDisposable> subscriptions = new List<IDisposable>();
+        private readonly List<IDisposable> subscriptions = new();
 
         protected void ChangeStateOn(IObservable<object> observable)
         {

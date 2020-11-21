@@ -2,16 +2,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Arinsys.Components.AspNetCore
 {
     public class BaseLayout : LayoutComponentBase, IDisposable
     {
-        private readonly List<IDisposable> subscriptions = new List<IDisposable>();
+        private readonly List<IDisposable> subscriptions = new();
 
         protected void ChangeStateOn(IObservable<object> observable)
         {
-            subscriptions.Add(observable.Subscribe(onNext: async nextValue => await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false)));
+            subscriptions.Add(observable.Subscribe(onNext: async nextValue => await TriggerStateChange()));
+        }
+
+        protected ConfiguredTaskAwaitable TriggerStateChange()
+        {
+            return InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         #region IDisposable Support
