@@ -2,7 +2,7 @@
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public abstract class BUIB_FormGroup<TValue> : BUI_FormGroup<TValue>
+    public abstract class BUIBFormGroup<TValue> : BUIFormGroup<TValue>
     {
         [Parameter]
         public GridColumnSpan GridColumnSpan { get; set; } = GridColumnSpan.Auto;

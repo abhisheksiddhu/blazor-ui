@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public partial class BUIB_Accordion
+    public partial class BUIBAccordion
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        internal ObservableCollection<BUIB_AccordionTab> Tabs { get; set; } = new();
+        internal ObservableCollection<BUIBAccordionTab> Tabs { get; set; } = new();
 
         protected override void OnInitialized()
         {
@@ -18,7 +18,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         }
     }
 
-    public class BUIB_AccordionTab : BaseComponent
+    public class BUIBAccordionTab : BaseComponent
     {
         [Parameter]
         public ElementStatusCategory Category { get; set; }
@@ -33,7 +33,7 @@ namespace Arinsys.Components.AspNetCore.Bootstrap
         public bool IsCollapsed { get; set; } = true;
 
         [CascadingParameter]
-        public BUIB_Accordion Accordion { get; set; }
+        public BUIBAccordion Accordion { get; set; }
 
         public void ToggleCollapse()
         {

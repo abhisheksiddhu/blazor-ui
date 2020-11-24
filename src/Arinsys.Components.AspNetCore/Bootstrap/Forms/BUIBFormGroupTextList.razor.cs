@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public partial class BUIB_FormGroupTextList : BUIB_FormGroup<List<string>>
+    public partial class BUIBFormGroupTextList : BUIBFormGroup<List<string>>
     {
         [Parameter]
         public List<string> Values { get; set; }

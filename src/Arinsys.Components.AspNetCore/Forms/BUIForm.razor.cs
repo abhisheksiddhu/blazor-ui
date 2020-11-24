@@ -5,13 +5,13 @@ using System;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public class BUI_FormDefinition<TEntity>
+    public class BUIFormDefinition<TEntity>
     {
         public Action<EventArgs, TEntity> OnSubmit { get; set; }
     }
 
-    public partial class BUI_Form<TEntity, TFormDefinition> : BaseComponent
-        where TFormDefinition : BUI_FormDefinition<TEntity>
+    public partial class BUIForm<TEntity, TFormDefinition> : BaseComponent
+        where TFormDefinition : BUIFormDefinition<TEntity>
     {
         [Parameter]
         public Action<EditContext, TEntity> OnValidSubmit { get; set; }
