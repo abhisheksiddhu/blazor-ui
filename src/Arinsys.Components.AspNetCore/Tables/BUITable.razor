@@ -2,30 +2,52 @@
 @typeparam TTableDataFilters
 @namespace Arinsys.Components.AspNetCore
 
-@if (Data is null)
-{
-    @if (Loading is not null)
-    {
-        @Loading
-    }
-}
-else
-{
-    <table class="@CssClass">
+<table class="@CssClass">
+    <thead>
         @if (Head is not null)
         {
-            <thead>
-                @Head
-            </thead>
+            @Head
         }
-        @if (Body is not null)
+        else if (Columns is not null && Columns.Any())
         {
-            <tbody>
-                @foreach (var rowData in Data)
+            foreach (var column in Columns)
+            {
+                if (column.Header is not null)
                 {
-                    @Body(rowData)
+                    @column.Header
                 }
-            </tbody>
+                else
+                {
+                    @column.Label
+                }
+            }
         }
-    </table>
-}
+    </thead>
+    <tbody>
+        <Virtualize ItemsProvider="@ItemsProvider">
+            <ItemContent>
+                @if (Body is not null)
+                {
+                    @Body(context)
+                }
+                else if (Columns is not null && Columns.Any())
+                {
+                    foreach (var column in Columns)
+                    {
+                        if (column.Body is not null)
+                        {
+                            @column.Body(context)
+                        }
+                        else
+                        {
+                            @column.Accessor(context)
+                        }
+                    }
+                }
+            </ItemContent>
+            <Placeholder>
+                @Loading
+            </Placeholder>
+        </Virtualize>
+    </tbody>
+</table>
