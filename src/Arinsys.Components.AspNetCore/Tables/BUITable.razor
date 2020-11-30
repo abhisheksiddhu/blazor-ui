@@ -1,5 +1,7 @@
 ﻿@typeparam TEntity
 @typeparam TTableDataFilters
+@typeparam TTableColumnDefinition
+@typeparam TTableDataResult
 @namespace Arinsys.Components.AspNetCore
 
 <table class="@CssClass">
@@ -10,43 +12,51 @@
         }
         else if (Columns is not null && Columns.Any())
         {
-            foreach (var column in Columns)
-            {
-                if (column.Header is not null)
+            <tr>
+                @foreach (var column in Columns)
                 {
-                    @column.Header
+                    <td>
+                        @if (column.Header is not null)
+                        {
+                            @column.Header
+                        }
+                        else
+                        {
+                            @column.Label
+                        }
+                    </td>
                 }
-                else
-                {
-                    @column.Label
-                }
-            }
+            </tr>
         }
     </thead>
     <tbody>
         <Virtualize ItemsProvider="@ItemsProvider">
             <ItemContent>
-                @if (Body is not null)
-                {
-                    @Body(context)
-                }
-                else if (Columns is not null && Columns.Any())
-                {
-                    foreach (var column in Columns)
+                <tr>
+                    @if (Body is not null)
                     {
-                        if (column.Body is not null)
+                        @Body(context)
+                    }
+                    else if (Columns is not null && Columns.Any())
+                    {
+                        foreach (var column in Columns)
                         {
-                            @column.Body(context)
-                        }
-                        else
-                        {
-                            @column.Accessor(context)
+                            <td>
+                                @if (column.Body is not null)
+                                {
+                                    @column.Body(context)
+                                }
+                                else
+                                {
+                                    @column.Accessor(context)
+                                }
+                            </td>
                         }
                     }
-                }
+                </tr>
             </ItemContent>
             <Placeholder>
-                @Loading
+                <tr><td>@Loading</td></tr>                
             </Placeholder>
         </Virtualize>
     </tbody>

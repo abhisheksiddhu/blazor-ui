@@ -10,22 +10,12 @@ using System.Threading.Tasks;
 
 namespace Arinsys.Components.AspNetCore
 {
-    public record ColumnDefinition<TEntity>
+    public record BUITableColumnDefinition<TEntity>
     {
         public string Label { get; init; }
         public RenderFragment Header { get; init; }
         public Func<TEntity, object> Accessor { get; init; }
         public RenderFragment<TEntity> Body { get; init; }
-    }
-
-    public class BUITableDataFilters<TEntity>
-    {
-        /// <summary> The start index of the data segment requested. </summary>
-        public int StartIndex { get; set; }
-        /// <summary> The requested number of items to be provided. The actual number of provided items does not need to match this value. </summary>
-        public int Count { get; set; }
-        /// <summary> The System.Threading.CancellationToken used to relay cancellation of the request. </summary>
-        public CancellationToken CancellationToken { get; set; }
     }
 
     public record BUITableDataResult<TEntity>
@@ -36,13 +26,25 @@ namespace Arinsys.Components.AspNetCore
         public int TotalItemCount { get; init; }
     }
 
-    public partial class BUITable<TEntity, TTableDataFilters> : BaseComponent
+    public record BUITableDataFilters<TEntity>
+    {
+        /// <summary> The start index of the data segment requested. </summary>
+        public int StartIndex { get; set; }
+        /// <summary> The requested number of items to be provided. The actual number of provided items does not need to match this value. </summary>
+        public int Count { get; set; }
+        /// <summary> The <see cref="System.Threading.CancellationToken" /> used to relay cancellation of the request. </summary>
+        public CancellationToken CancellationToken { get; set; }
+    }
+
+    public partial class BUITable<TEntity, TTableDataFilters, TTableColumnDefinition, TTableDataResult> : BaseComponent
         where TTableDataFilters : BUITableDataFilters<TEntity>, new()
+        where TTableColumnDefinition : BUITableColumnDefinition<TEntity>
+        where TTableDataResult : BUITableDataResult<TEntity>
     {
         internal readonly BehaviorSubject<object> filtersUpdated = new(null);
 
         [Parameter]
-        public virtual Func<TTableDataFilters, Task<BUITableDataResult<TEntity>>> DataAccessor { get; set; }
+        public virtual Func<TTableDataFilters, Task<TTableDataResult>> DataAccessor { get; set; }
 
         [Parameter]
         public RenderFragment<TEntity> Body { get; set; }
@@ -54,7 +56,7 @@ namespace Arinsys.Components.AspNetCore
         public RenderFragment Loading { get; set; }
 
         [Parameter]
-        public IEnumerable<ColumnDefinition<TEntity>> Columns { get; set; }
+        public IEnumerable<TTableColumnDefinition> Columns { get; set; }
 
         public IObservable<TTableDataFilters> FiltersUpdated => filtersUpdated.Select(_ => Filters);
         public TTableDataFilters Filters { get; private set; } = new();
@@ -66,13 +68,11 @@ namespace Arinsys.Components.AspNetCore
 
         protected virtual async ValueTask<ItemsProviderResult<TEntity>> ItemsProvider(ItemsProviderRequest request)
         {
-            Filters.StartIndex = request.StartIndex;
-            Filters.Count = request.Count;
-            Filters.CancellationToken = request.CancellationToken;
+            Filters = Filters with { StartIndex = request.StartIndex, Count = request.Count, CancellationToken = request.CancellationToken };
 
             TriggerFiltersUpdated();
 
-            BUITableDataResult<TEntity> tableDataResult = await DataAccessor(Filters);
+            TTableDataResult tableDataResult = await DataAccessor(Filters);
 
             return new(tableDataResult.Items, tableDataResult.TotalItemCount);
         }

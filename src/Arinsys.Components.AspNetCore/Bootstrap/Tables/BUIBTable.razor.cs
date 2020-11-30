@@ -1,9 +1,15 @@
 ﻿namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public class BUIBTableDataFilters<TEntity> : BUITableDataFilters<TEntity> { }
+    public record BUIBTableDataResult<TEntity> : BUITableDataResult<TEntity> { }
 
-    public partial class BUIBTable<TEntity, TTableDataFilters> : BUITable<TEntity, TTableDataFilters>
+    public record BUIBTableColumnDefinition<TEntity> : BUITableColumnDefinition<TEntity> { }
+
+    public record BUIBTableDataFilters<TEntity> : BUITableDataFilters<TEntity> { }
+
+    public partial class BUIBTable<TEntity, TTableDataFilters, TTableColumnDefinition, TTableDataResult> : BUITable<TEntity, TTableDataFilters, TTableColumnDefinition, TTableDataResult>
         where TTableDataFilters : BUIBTableDataFilters<TEntity>, new()
+        where TTableColumnDefinition : BUIBTableColumnDefinition<TEntity>
+        where TTableDataResult : BUIBTableDataResult<TEntity>
     {
         protected override void OnInitialized()
         {

@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-using System;
-
 namespace Arinsys.Components.AspNetCore
 {
-    public class BUIFormDefinition<TEntity>
+    public interface IBUIFormDefinition
     {
-        public Action<EventArgs, TEntity> OnSubmit { get; set; }
+        string FormIdentifierPrefix { get; set; }
+    }
+
+    public class BUIFormDefinition<TEntity> : IBUIFormDefinition
+    {
+        public string FormIdentifierPrefix { get; set; }
     }
 
     public partial class BUIForm<TEntity, TFormDefinition> : BaseComponent
-        where TFormDefinition : BUIFormDefinition<TEntity>
+        where TFormDefinition : BUIFormDefinition<TEntity>, new()
     {
         [Parameter]
-        public Action<EditContext, TEntity> OnValidSubmit { get; set; }
+        public EventCallback<EditContext> OnValidSubmit { get; set; }
 
         [Parameter]
-        public Action<EditContext, TEntity> OnInvalidSubmit { get; set; }
+        public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
         [Parameter]
         public virtual TEntity Data { get; set; }
@@ -26,6 +29,9 @@ namespace Arinsys.Components.AspNetCore
         public RenderFragment<TEntity> ChildContent { get; set; }
 
         [Parameter]
-        public RenderFragment LoadingContent { get; set; }
+        public RenderFragment Loading { get; set; }
+
+        [Parameter]
+        public TFormDefinition Definition { get; set; } = new();
     }
 }

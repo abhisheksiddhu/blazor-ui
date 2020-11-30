@@ -2,22 +2,16 @@
 @typeparam TFormDefinition
 @namespace Arinsys.Components.AspNetCore
 
-@if (Data == null)
+@if (Data is null)
 {
-    @if (LoadingContent is null)
-    {
-        <h2>Loading</h2>
-    }
-    else
-    {
-        @LoadingContent
-    }
+    @Loading
 }
 else
 {
-    <EditForm Model="Data" OnValidSubmit="(context) => OnValidSubmit(context, Data)" OnInvalidSubmit="(context) => OnInvalidSubmit?.Invoke(context, Data)" class="@CssClass">
+    <EditForm Model="Data" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit" class="@CssClass">
         <DataAnnotationsValidator />
-
-        @ChildContent(Data)
+        <CascadingValue Value="Definition">
+            @ChildContent(Data)
+        </CascadingValue>
     </EditForm>
 }

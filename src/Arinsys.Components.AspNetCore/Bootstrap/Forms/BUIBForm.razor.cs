@@ -1,9 +1,33 @@
-﻿namespace Arinsys.Components.AspNetCore.Bootstrap
+﻿using Microsoft.AspNetCore.Components;
+
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Arinsys.Components.AspNetCore.Bootstrap
 {
-    public class BUIBFormDefinition<TEntity> : BUIFormDefinition<TEntity> { }
+    public interface IBUIBFormDefinition : IBUIFormDefinition
+    {
+        GridColumnSpan LabelColumnSpan { get; set; }
+        GridColumnSpan InputColumnSpan { get; set; }
+    }
+
+    public class BUIBFormDefinition<TEntity> : BUIFormDefinition<TEntity>, IBUIBFormDefinition
+    {
+        public GridColumnSpan LabelColumnSpan { get; set; } = GridColumnSpan.Three;
+        public GridColumnSpan InputColumnSpan { get; set; } = GridColumnSpan.Nine;
+    }
 
     public partial class BUIBForm<TEntity, TFormDefinition> : BUIForm<TEntity, TFormDefinition>
-        where TFormDefinition : BUIFormDefinition<TEntity>
+        where TFormDefinition : BUIFormDefinition<TEntity>, new()
+    { }
+
+
+    public abstract class BUIBFormElement<TValue> : BUIFormElement<TValue>
     {
+        public string IsInvalidCssClass => IsModified && ValidationMessages.Any() ? "is-invalid" : string.Empty;
+
+        [CascadingParameter]
+        public IBUIBFormDefinition FormDefinition { get; set; }
     }
+
 }

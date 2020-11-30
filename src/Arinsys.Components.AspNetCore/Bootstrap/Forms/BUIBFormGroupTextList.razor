@@ -1,23 +1,49 @@
-﻿@inherits BUIBFormGroup<List<string>>
+﻿@inherits BUIBFormElement<List<string>>
 @namespace Arinsys.Components.AspNetCore.Bootstrap
 
-<div class="form-group @( GridColumnSpan == GridColumnSpan.Auto ? "col" : $"col-{(int)GridColumnSpan}" )">
-    <label>@Label</label>
-    @for (int i = 0; i < Values?.Count; i++)
-    {
-        int index = i;
-        <div class="input-group">
-            <input type="text" class="form-control @( ValidationMessages.Any() ? "is-invalid" : "")" placeholder="@Placeholder" value="@Values[index]" @oninput="e => OnValueChanged(e, index)" />
-            <span class="input-group-append">
-                <button type="button" class="btn btn-primary" @onclick="() => OnValueDeleted(index)">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </span>
-        </div>
-    }
-    <button type="button" class="btn btn-primary" @onclick="OnValueAdded">Add</button>
-    @foreach (var message in ValidationMessages)
-    {
-        <div class="invalid-feedback">@message</div>
-    }
+<div class="form-group row @CssClass">
+    <label class="@FormDefinition.LabelColumnSpan.GetCssClass()" for="@FormDefinition.GetPrefixedIdentifier(Identifier)">@Label</label>
+    <div class="@FormDefinition.InputColumnSpan.GetCssClass()">
+        @for (int i = 0; i < Value?.Count; i++)
+        {
+            int index = i;
+            <div class="mb-2">
+                <BUIBInputGroupText Identifier="@Identifier" InputPrepend="@InputPrepend" Placeholder="@Placeholder"
+                                    Value="@Value[index]" ValueChanged="@(newValue => OnValueChanged(newValue, index))">
+                    <InputAppendBody>
+                        <button type="button" class="btn btn-primary" @onclick="() => OnValueDeleted(index)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </InputAppendBody>
+                </BUIBInputGroupText>
+            </div>
+        }
+        <button type="button" class="btn btn-primary" @onclick="OnValueAdded">Add</button>
+    </div>
 </div>
+
+@code{
+    [Parameter]
+    public string InputPrepend { get; set; }
+
+    protected async Task OnValueChanged(string newValue, int index)
+    {
+        Value[index] = newValue;
+        CascadedEditContext.Validate();
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    protected async Task OnValueDeleted(int index)
+    {
+        Value.RemoveAt(index);
+        CascadedEditContext.Validate();
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    protected async Task OnValueAdded()
+    {
+        Value.Add(string.Empty);
+        CascadedEditContext.Validate();
+        await ValueChanged.InvokeAsync(Value);
+    }
+}
