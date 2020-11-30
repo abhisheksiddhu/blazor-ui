@@ -2,7 +2,7 @@
 @using Arinsys.Components.AspNetCore.Samples.Models
 @using Arinsys.Components.AspNetCore.Samples.Fakes
 
-<BUIBTable DataAccessor="GetData" TEntity="User" TTableDataFilters="BUIBTableDataFilters<User>">
+<BUIBTable DataAccessor="GetData" TEntity="User" TTableDataFilters="BUIBTableDataFilters<User>" TTableColumnDefinition="BUIBTableColumnDefinition<User>" TTableDataResult="BUIBTableDataResult<User>">
     <Head>
         <tr>
             <th>Id</th>
@@ -20,9 +20,10 @@
 </BUIBTable>
 
 @code{
-    protected Task<IEnumerable<User>> GetData(BUIBTableDataFilters<User> tableDataFilters)
+    protected Task<BUIBTableDataResult<User>> GetData(BUIBTableDataFilters<User> tableDataFilters)
     {
         IEnumerable<User> users = FakeUser.ValidDefaults.Generate(10);
-        return Task.FromResult(users);
+        BUIBTableDataResult<User> result = new() { Items = users, TotalItemCount = 10 };
+        return Task.FromResult(result);
     }
 }
