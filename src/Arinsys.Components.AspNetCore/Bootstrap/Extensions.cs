@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Arinsys.Components.AspNetCore.Bootstrap
+﻿namespace Arinsys.Components.AspNetCore.Bootstrap
 {
     public static class EnumExtensions
     {
