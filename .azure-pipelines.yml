@@ -4,7 +4,7 @@ trigger:
       - dev-*
   paths:
     include:
-      - src/Arinsys.Components.AspNetCore/*
+      - src/Arinsys.AspNetCore.Components/*
       - .azure-pipelines.yml
 
 pool: 'Default Self Hosted'
@@ -25,28 +25,28 @@ steps:
         Write-Host "##vso[build.updatebuildnumber]$buildName"
 
   - task: DotNetCoreCLI@2
-    displayName: 'Restore Nuget packages for Arinsys.Components.AspNetCore project'
+    displayName: 'Restore Nuget packages for Arinsys.AspNetCore.Components project'
     inputs:
       command: 'restore'
       noCache: true
-      projects: 'src/Arinsys.Components.AspNetCore/Arinsys.Components.AspNetCore.csproj'
+      projects: 'src/Arinsys.AspNetCore.Components/Arinsys.AspNetCore.Components.csproj'
       feedsToUse: 'select'
       vstsFeed: '$(VSTS_FEED)'
 
   - task: DotNetCoreCLI@2
-    displayName: 'Run tests for Arinsys.Components.AspNetCore.Tests project'
+    displayName: 'Run tests for Arinsys.AspNetCore.Components.Tests project'
     inputs:
       command: test
-      projects: 'tests/Arinsys.Components.AspNetCore.Tests/Arinsys.Components.AspNetCore.Tests.csproj'
+      projects: 'tests/Arinsys.AspNetCore.Components.Tests/Arinsys.AspNetCore.Components.Tests.csproj'
       arguments: '--configuration  $(BuildConfiguration) --collect "Code coverage"'
 
   # publish .net core projects artifacts
   - task: DotNetCoreCLI@2
-    displayName: 'Pack Arinsys.Components.AspNetCore project'
+    displayName: 'Pack Arinsys.AspNetCore.Components project'
     inputs:
       command: 'custom'
       custom: 'pack'
-      projects: 'src/Arinsys.Components.AspNetCore/Arinsys.Components.AspNetCore.csproj'
+      projects: 'src/Arinsys.AspNetCore.Components/Arinsys.AspNetCore.Components.csproj'
       arguments: >-
         --interactive 
         --output "$(Build.ArtifactStagingDirectory)"
@@ -55,9 +55,9 @@ steps:
         /p:PackageVersion="$(versionNumber)"
 
   - task: DotNetCoreCLI@2
-    displayName: 'Publish Arinsys.Components.AspNetCore nuget package'
+    displayName: 'Publish Arinsys.AspNetCore.Components nuget package'
     inputs:
       command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Arinsys.Components.AspNetCore*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Arinsys.AspNetCore.Components*.nupkg'
       nuGetFeedType: 'internal'
       publishVstsFeed: '$(VSTS_FEED)'
