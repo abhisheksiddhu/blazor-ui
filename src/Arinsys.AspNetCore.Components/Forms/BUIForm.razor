@@ -1,0 +1,17 @@
+﻿@typeparam TEntity
+@typeparam TFormDefinition
+@namespace Arinsys.AspNetCore.Components
+
+@if (Data is null)
+{
+    @Loading
+}
+else
+{
+    <EditForm Model="Data" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit" class="@CssClass">
+        <DataAnnotationsValidator />
+        <CascadingValue Value="Definition">
+            @ChildContent(Data)
+        </CascadingValue>
+    </EditForm>
+}

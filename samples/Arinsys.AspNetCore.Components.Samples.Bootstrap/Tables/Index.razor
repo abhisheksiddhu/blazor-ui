@@ -1,0 +1,29 @@
+﻿@page "/tables"
+@using Arinsys.AspNetCore.Components.Samples.Models
+@using Arinsys.AspNetCore.Components.Samples.Fakes
+
+<BUIBTable DataAccessor="GetData" TEntity="User" TTableDataFilters="BUIBTableDataFilters<User>" TTableColumnDefinition="BUIBTableColumnDefinition<User>" TTableDataResult="BUIBTableDataResult<User>">
+    <Head>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </Head>
+    <Body>
+        <tr>
+            <td>@context.Id</td>
+            <td>@context.Name</td>
+            <td>@context.Email</td>
+        </tr>
+    </Body>
+</BUIBTable>
+
+@code{
+    protected Task<BUIBTableDataResult<User>> GetData(BUIBTableDataFilters<User> tableDataFilters)
+    {
+        IEnumerable<User> users = FakeUser.ValidDefaults.Generate(10);
+        BUIBTableDataResult<User> result = new() { Items = users, TotalItemCount = 10 };
+        return Task.FromResult(result);
+    }
+}
