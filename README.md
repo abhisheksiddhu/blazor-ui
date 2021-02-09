@@ -4,7 +4,7 @@ Blazor UI is a lightweight, extensible, open-source and cross-platform component
 
 ## Resources
 
-- Dev Build [![Arinsys.Components.AspNetCore package in public feed in Azure Artifacts](https://feeds.dev.azure.com/arinsys/b06546a9-49eb-44a3-97a8-519ec7ab2744/_apis/public/Packaging/Feeds/6372e361-3831-4524-b594-0af8130c0d7c/Packages/a089d9f3-2d3d-4059-8658-8f402b8b7c69/Badge)](https://dev.azure.com/arinsys/public/_packaging?_a=package&feed=6372e361-3831-4524-b594-0af8130c0d7c&package=a089d9f3-2d3d-4059-8658-8f402b8b7c69&preferRelease=true)
+- Dev Build [![Arinsys.AspNetCore.Components package in public feed in Azure Artifacts](https://feeds.dev.azure.com/arinsys/b06546a9-49eb-44a3-97a8-519ec7ab2744/_apis/public/Packaging/Feeds/6372e361-3831-4524-b594-0af8130c0d7c/Packages/7bb5b88e-7a7a-4d40-8570-d31fb9845d10/Badge)](https://dev.azure.com/arinsys/public/_packaging?_a=package&feed=6372e361-3831-4524-b594-0af8130c0d7c&package=7bb5b88e-7a7a-4d40-8570-d31fb9845d10&preferRelease=true)
 
 - Bootstrap Demo(Coming Soon)
 - Material Demo(Coming Soon)
