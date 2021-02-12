@@ -6,7 +6,7 @@
 {
     @Loading
 }
-else
+else if (ChildContent is not null)
 {
     <EditForm Model="Data" OnValidSubmit="OnValidSubmit" OnInvalidSubmit="OnInvalidSubmit" class="@CssClass">
         <DataAnnotationsValidator />
