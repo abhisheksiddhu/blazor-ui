@@ -9,7 +9,7 @@
         </div>
     }
     <input type="text" value="@Value" @oninput="OnValueChanged" placeholder="@Placeholder" id="@FormDefinition.GetPrefixedIdentifier(Identifier)"
-           name="@Identifier" aria-label="@Identifier" class="form-control @IsInvalidCssClass" />
+           name="@Identifier" aria-label="@Identifier" class="@($"form-control {IsInvalidCssClass}")" />
     @if (!string.IsNullOrWhiteSpace(InputAppend) || InputAppendBody is not null)
     {
         <div class="input-group-append">
@@ -23,14 +23,14 @@
             }
         </div>
     }
-</div>
-@if (IsModified && ValidationMessages.Any())
-{
-    @foreach (var message in ValidationMessages)
+    @if (IsModified && ValidationMessages.Any())
     {
-        <div class="invalid-feedback">@message</div>
+        @foreach (var message in ValidationMessages)
+        {
+            <div class="invalid-feedback">@message</div>
+        }
     }
-}
+</div>
 
 @code {
     [Parameter]

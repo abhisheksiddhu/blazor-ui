@@ -26,6 +26,7 @@ namespace Arinsys.AspNetCore.Components
         protected async Task OnValueChanged(ChangeEventArgs eventArgs)
         {
             await ValueChanged.InvokeAsync((TValue)eventArgs.Value);
+            IsModified = true;
             CascadedEditContext.Validate();
         }
 
@@ -34,7 +35,7 @@ namespace Arinsys.AspNetCore.Components
 
         public FieldIdentifier FieldIdentifier => CascadedEditContext.Field(Identifier);
 
-        public bool IsModified => CascadedEditContext.IsModified(FieldIdentifier);
+        public bool IsModified { get; private set; }
 
         public IEnumerable<string> ValidationMessages => CascadedEditContext.GetValidationMessages(FieldIdentifier);
     }
